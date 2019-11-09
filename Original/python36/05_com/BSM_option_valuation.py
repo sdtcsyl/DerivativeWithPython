@@ -150,3 +150,10 @@ def plot_values(function):
     plt.grid(True)
     plt.xlabel('volatility $\sigma$')
     plt.tight_layout()
+
+
+if __name__ == "__main__":
+    function = BSM_put_value
+    function1 = BSM_call_value
+    plot_values(function)
+    plot_values(function1)

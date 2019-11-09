@@ -188,3 +188,10 @@ def plot_greeks(function, greek):
     plot.set_xlabel('strike $K$')
     plot.set_ylabel('maturity $T$')
     plot.set_zlabel('%s(K, T)' % greek)
+
+
+if __name__ == "__main__":
+    function = BSM_gamma
+    greek = 'BSM_gamma'
+    plot_greeks(function, greek)
+    

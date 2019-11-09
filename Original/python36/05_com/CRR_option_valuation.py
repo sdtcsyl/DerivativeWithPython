@@ -89,3 +89,12 @@ def plot_convergence(mmin, mmax, step_size):
     plt.ylabel('European call option value')
     plt.legend(loc=4)
     plt.xlim(0, mmax)
+
+
+if __name__ == "__main__":
+    otype = 'call'
+    mmin = 10
+    mmax = 500
+    step_size = 2
+    m = CRR_option_value(S0, K, T, r, sigma, otype, M=4)
+    plot_convergence(mmin, mmax, step_size)
