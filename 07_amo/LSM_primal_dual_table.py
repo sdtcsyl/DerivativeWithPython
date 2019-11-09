@@ -22,17 +22,17 @@ t0 = time()
 np.random.seed(150000)  # seed for Python RNG
 
 # Simulation Parameters
-runs = 5
+runs = 25
 write = True
 otype = [1, 2]  # option type
-M = [10, 20]  # time steps
-I1 = np.array([4, 6]) * 4096  # replications for regression
-I2 = np.array([1, 2]) * 1024  # replications for valuation
-J = [50, 75]  # replications for nested MCS
-reg = [5, 9]  # no of basis functions
-AP = [False, True]  # antithetic paths
-MM = [False, True]  # moment matching of RN
-ITM = [True, False]  # ITM paths for regression
+M = [10, 25, 50]  # time steps
+I1 = np.array([4]) * 4096  # replications for regression
+I2 = np.array([1]) * 1024  # replications for valuation
+J = [50]  # replications for nested MCS
+reg = [9]  # no of basis functions
+AP = [False]  # antithetic paths
+MM = [True]  # moment matching of RN
+ITM = [False]  # ITM paths for regression
 
 results = pd.DataFrame()
 
@@ -44,10 +44,10 @@ results = pd.DataFrame()
 def generate_random_numbers(I):
     ''' Function to generate I pseudo-random numbers. '''
     if AP:
-            ran = np.random.standard_normal(I / 2)
-            ran = np.concatenate((ran, -ran))
+        ran = np.random.standard_normal(I / 2)
+        ran = np.concatenate((ran, -ran))
     else:
-            ran = np.random.standard_normal(I)
+        ran = np.random.standard_normal(I)
     if MM:
         ran = ran - np.mean(ran)
         ran = ran / np.std(ran)
@@ -60,8 +60,8 @@ def generate_paths(I):
     S[0] = S0  # initial values
     for t in range(1, M + 1, 1):  # stock price paths
         ran = generate_random_numbers(I)
-        S[t] = S[t - 1] * np.exp((r - sigma ** 2 / 2) * dt +
-                                 sigma * ran * math.sqrt(dt))
+        S[t] = S[t - 1] * np.exp((r - sigma ** 2 / 2) * dt
+                                 + sigma * ran * math.sqrt(dt))
     return S
 
 
@@ -70,8 +70,8 @@ def inner_values(S):
     if otype == 1:
         return np.maximum(40. - S, 0)
     else:
-        return np.minimum(40., np.maximum(90. - S, 0) +
-                          np.maximum(S - 110., 0))
+        return np.minimum(40., np.maximum(90. - S, 0)
+                          + np.maximum(S - 110., 0))
 
 
 def nested_monte_carlo(St, J):
@@ -125,8 +125,8 @@ for pa in para:
         S = generate_paths(I1)  # generate stock price paths
         h = inner_values(S)  # inner values
         V = inner_values(S)  # value matrix
-        # regression parameter matrix
         rg = np.zeros((M + 1, reg + 1), dtype=np.float)
+        # regression parameter matrix
 
         itm = np.greater(h, 0)  # ITM paths
         for t in range(M - 1, 0, -1):
@@ -138,11 +138,11 @@ for pa in para:
                 else:
                     rg[t] = np.polyfit(S_itm, V_itm * df, reg)
             else:
-                # regression at time t
                 rg[t] = np.polyfit(S[t], V[t + 1] * df, reg)
+                # regression at time t
             C = np.polyval(rg[t], S[t])  # continuation values
-            # exercise decision
             V[t] = np.where(h[t] > C, h[t], V[t + 1] * df)
+            # exercise decision
 
         # Simulation
         Q = np.zeros((M + 1, I2), dtype=np.float)  # martingale matrix
@@ -154,8 +154,8 @@ for pa in para:
         # Primal Valuation
         for t in range(M - 1, 0, -1):
             C = np.polyval(rg[t], S[t])  # continuation values
-            # exercise decision
             V[t] = np.where(h[t] > C, h[t], V[t + 1] * df)
+            # exercise decision
         V0 = df * np.sum(V[1]) / I2  # LSM estimator
 
         # Dual Valuation
@@ -166,11 +166,11 @@ for pa in para:
                 St = nested_monte_carlo(S[t - 1, i], J)  # nested MCS
                 Ct = np.polyval(rg[t], St)  # cv from nested MCS
                 ht = inner_values(St)  # iv from nested MCS
-                # average of V(t,i,j)
                 VtJ = np.sum(np.where(ht > Ct, ht, Ct)) / len(St)
+                # average of V(t,i,j)
                 Q[t, i] = Q[t - 1, i] / df + (Vt - VtJ)  # "optimal" martingale
-                # high estimator values
                 U[t, i] = max(U[t - 1, i] / df, h[t, i] - Q[t, i])
+                # high estimator values
                 if t == M:
                     U[t, i] = np.maximum(U[t - 1, i] / df,
                                          np.mean(ht) - Q[t, i])
@@ -182,16 +182,16 @@ for pa in para:
               "| %6.3f | %6.3f | %6.3f" % (V0, U0, AV))
         # results storage
         results = results.append(pd.DataFrame({'otype': otype, 'runs': runs,
-            'M': M, 'I1': I1, 'I2': I2, 'J': J, 'reg': reg, 'AP': AP,
-            'MM': MM, 'ITM': ITM, 'LSM': V0, 'LSM_se': (V0 - V0_true) ** 2,
-            'DUAL': U0, 'DUAL_se': (U0 - V0_true) ** 2, 'AV': AV,
-            'AV_se': (AV - V0_true) ** 2}, index=[0,]), ignore_index=True)
+               'M': M, 'I1': I1, 'I2': I2, 'J': J, 'reg': reg, 'AP': AP,
+               'MM': MM, 'ITM': ITM, 'LSM': V0, 'LSM_se': (V0 - V0_true) ** 2,
+               'DUAL': U0, 'DUAL_se': (U0 - V0_true) ** 2, 'AV': AV,
+               'AV_se': (AV - V0_true) ** 2}, index=[0, ]), ignore_index=True)
 
 t1 = time()
 print("Total time in min %s" % ((t1 - t0) / 60))
 
 if write:
     h5 = pd.HDFStore('results_%s_%s.h5' % (datetime.now().date(),
-                     str(datetime.now().time())[:8]), 'w')
+                                    str(datetime.now().time())[:8]), 'w')
     h5['results'] = results
     h5.close()
