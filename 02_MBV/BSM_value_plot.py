@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 mpl.rcParams['font.family'] = 'serif'
 # Import Valuation Function from Chapter 5
 import sys
-sys.path.append('05_com')
+sys.path.append('../05_com')
 from BSM_option_valuation import BSM_call_value
 # Model and Option Parameters
 K = 8000 # strike price
