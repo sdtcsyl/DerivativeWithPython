@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Circular convolution of two 1-dim vectors
 # 06_fou/convolution.py
@@ -7,9 +6,12 @@
 # Derivatives Analytics with Python
 #
 import numpy as np
+
 #
 # Function Definitions
 #
+
+
 def revpy(a):
     ''' Reversing the order of the vector's numbers (for loop). '''
     a = np.array(a)
@@ -27,10 +29,11 @@ def revnp(a):
     b[1:] = b[1:][::-1]
     return b
 
+
 def convolution(a, b):
     ''' Convolution of two vectors. '''
     if len(a) != len(b):
-        raise ValueError('Lengths of vectors do not match.')
+        raise ValueError("Lengths of vectors do not match.")
     n = len(a)
     c = np.zeros(n, dtype=np.float)
     for j in range(n):
@@ -42,3 +45,10 @@ def convolution(a, b):
                 s += a[j - k + n] * b[k]
         c[j] = s
     return c
+
+if __name__ == "__main__":
+    a = [1,2,3,4,5,6,7,8,9]
+    b = revpy(a)
+    c = revnp(a)
+    d = convolution(b,c)
+    

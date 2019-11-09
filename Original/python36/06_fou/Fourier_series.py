@@ -52,3 +52,6 @@ def plot_fourier_series():
     plt.plot(x, abs(x), 'b', label='$f(x) = |x|$')
     plt.plot(x, y2, 'r-.', lw=3.0, label='Fourier series $n=5$')
     plt.legend(loc=9)
+
+if __name__ == '__main__':
+    plot_fourier_series()

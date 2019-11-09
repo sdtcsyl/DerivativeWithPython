@@ -26,3 +26,7 @@ def get_binomial_parameters(M=100):
     d = 1 / u  # down movement
     q = (exp(r * dt) - d) / (u - d)  # martingale branch probability
     return dt, df, u, d, q
+
+
+if __name__ == "__main__":
+    a = get_binomial_parameters()

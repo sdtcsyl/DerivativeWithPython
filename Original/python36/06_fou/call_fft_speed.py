@@ -30,3 +30,8 @@ def call_fft_value(M):
     qv[1] = 1 - q
     C0 = fft(math.exp(-r * T) * ifft(CT) * fft(qv) ** M)
     return C0
+
+
+if __name__ == "__main__":
+    M = 10
+    a = call_fft_value(M)

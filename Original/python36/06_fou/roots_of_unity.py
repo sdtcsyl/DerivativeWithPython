@@ -30,3 +30,6 @@ def generate_plot():
     generate_subplot(n=30)
 
     plt.subplots_adjust(left=0.05, bottom=0.2, top=0.8, right=1.0)
+
+if __name__ == '__main__':
+    generate_plot()

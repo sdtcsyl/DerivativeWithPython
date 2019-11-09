@@ -45,3 +45,10 @@ def convolution(a, b):
                 s += a[j - k + n] * b[k]
         c[j] = s
     return c
+
+if __name__ == "__main__":
+    a = [1,2,3,4,5,6,7,8,9]
+    b = revpy(a)
+    c = revnp(a)
+    d = convolution(b,c)
+    
