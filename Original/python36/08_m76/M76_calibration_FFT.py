@@ -22,7 +22,7 @@ np.set_printoptions(suppress=True,
 # Market Data from www.eurexchange.com
 # as of 30. September 2014
 #
-h5 = pd.HDFStore('08_m76/option_data.h5', 'r')
+h5 = pd.HDFStore('option_data.h5', 'r')
 data = h5['data']  # European call & put option data (3 maturities)
 h5.close()
 S0 = 3225.93  # EURO STOXX 50 level
