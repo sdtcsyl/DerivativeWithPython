@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import scipy.interpolate as sci
 from scipy.optimize import fmin
-sys.path.append('10_mcs')
+sys.path.append('../10_mcs')
 from CIR_zcb_valuation_gen import B
 
 mpl.rcParams['font.family'] = 'serif'
@@ -151,3 +151,15 @@ def plot_zcb_values(p0, T):
     plt.plot(t_list, r_list, 'ro')
     plt.xlabel('time horizon in years')
     plt.ylabel('unit zero-coupon bond value')
+    
+if __name__ == "__main__":
+    #FIGURE 11.1
+    plot_term_structure()
+    
+    #FIGURE 11.2
+    opt = CIR_calibration()
+    plot_calibrated_frc(opt)
+    
+    #FIGURE 11.3
+    # parameters may not be correct but the image is the similar to the book's
+    plot_zcb_values([0.974,1,1], 2)

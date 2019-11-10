@@ -13,7 +13,7 @@
 #
 import gc
 import sys
-sys.path.append('09_gmm/')
+sys.path.append('../09_gmm/')
 import math
 import string
 import numpy as np
@@ -116,7 +116,7 @@ def H93_index_paths(S0, r, v, row, cho_matrix):
     sdt = math.sqrt(dt)
     S = np.zeros((M + 1, I), dtype=np.float)
     S[0] = math.log(S0)
-    for t in xrange(1, M + 1, 1):
+    for t in range(1, M + 1, 1):
         ran = np.dot(cho_matrix, rand[:, t])
         S[t] += S[t - 1]
         S[t] += ((r[t] + r[t - 1]) / 2 - v[t] / 2) * dt
@@ -163,14 +163,14 @@ tmpl_2 = '%4.3f | %3d ' + 7 * '| %6.3f ' + '| %5s | %5s'
 
 for alpha in it.product(py_list, x_disc_list, m_list, paths_list,
                         control_variate, anti_paths, moment_matching):
-    print '\n\n', alpha, '\n'
+    print('\n\n', alpha, '\n')
     (PY1, PY2), x_disc, M, I, convar, antipath, momatch = alpha
-    for run in xrange(runs):  # simulation runs
-        for panel in xrange(4):  # panels
+    for run in range(runs):  # simulation runs
+        for panel in range(4):  # panels
             if verbose:
-                print "\nResults for Panel %d\n" % (panel + 1)
-                print tmpl_1 % ('T', 'K', 'V0', 'V0_LSM', 'V0_CV', 'P0',
-                    'P0_MCS', 'err', 'rerr', 'acc1', 'acc2')
+                print("\nResults for Panel %d\n" % (panel + 1))
+                print(tmpl_1 % ('T', 'K', 'V0', 'V0_LSM', 'V0_CV', 'P0',
+                    'P0_MCS', 'err', 'rerr', 'acc1', 'acc2'))
             # correlation matrix, cholesky decomposition
             v0, kappa_v, sigma_v, rho = para[panel]
             correlation_matrix = np.zeros((3, 3), dtype=np.float)
@@ -204,7 +204,7 @@ for alpha in it.product(py_list, x_disc_list, m_list, paths_list,
                     h = np.maximum(K - S, 0)
                     # value/cash flow matrix
                     V = np.maximum(K - S, 0)
-                    for t in xrange(M - 1, 0, -1):
+                    for t in range(M - 1, 0, -1):
                         df = np.exp(-(r[t] + r[t + 1]) / 2 * dt)
                         # select only ITM paths
                         itm = np.greater(h[t], 0)
@@ -290,8 +290,8 @@ for alpha in it.product(py_list, x_disc_list, m_list, paths_list,
                     z += 1 # option counter
 
                     if verbose:
-                        print tmpl_2 % (T, K, V0, V0_LSM, V0_CV, P0,
-                            P0_MCS, error, rel_error, PY1_acc, PY2_acc)
+                        print(tmpl_2 % (T, K, V0, V0_LSM, V0_CV, P0,
+                            P0_MCS, error, rel_error, PY1_acc, PY2_acc))
                     
                     results = results.append(res, ignore_index=True)
 
@@ -302,4 +302,4 @@ if write:
     h5['results'] = results
     h5.close()
 
-print "Total time in minutes %8.2f" % ((time() - t0) / 60)
+print("Total time in minutes %8.2f" % ((time() - t0) / 60))

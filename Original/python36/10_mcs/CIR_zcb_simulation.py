@@ -142,3 +142,4 @@ if __name__ == '__main__':
     np.random.seed(50000)  # seed for RNG
 
     r = CIR_generate_paths(r0, kappa_r, theta_r, sigma_r, T, M, I)
+    graphical_comparison()

@@ -22,7 +22,7 @@ import itertools as it
 from datetime import datetime
 from BCC_option_valuation import H93_call_value
 from H93_european_mcs import SRD_generate_paths
-sys.path.append('09_gmm/')
+sys.path.append('../09_gmm/')
 from CIR_zcb_valuation_gen import B
 
 # 'True' American Options Prices by Monte Carlo

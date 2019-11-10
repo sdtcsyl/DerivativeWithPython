@@ -12,7 +12,7 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-sys.path.extend(['03_stf', '09_gmm'])
+sys.path.extend(['..\03_stf', '..\09_gmm'])
 from BSM_imp_vol import call_option
 from CIR_zcb_valuation import B
 from H93_calibration import S0, r0, kappa_r, theta_r, sigma_r
@@ -66,3 +66,10 @@ def plot_implied_volatilities(options, model):
         plt.tight_layout()
         plt.savefig('../images/11_cal/%s_calibration_iv_%s.pdf'
                     % (model, str(mat)[:10]))
+
+
+if __name__ == "__main__":
+    
+    
+    
+    
