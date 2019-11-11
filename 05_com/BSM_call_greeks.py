@@ -191,7 +191,30 @@ def plot_greeks(function, greek):
 
 
 if __name__ == "__main__":
+    
+    #FIGURE 5.3 The delta of the European call option with respect to maturity date T and strike K
+    function = BSM_delta
+    greek = 'BSM_delta'
+    plot_greeks(function, greek)
+    
+    #FIGURE 5.4 The gamma of the European call option with respect to maturity date T and strike K
     function = BSM_gamma
     greek = 'BSM_gamma'
     plot_greeks(function, greek)
+    
+    #FIGURE 5.5 The theta of the European call option with respect to maturity date T and strike K
+    function = BSM_theta
+    greek = 'BSM_theta'
+    plot_greeks(function, greek)
+    
+    #FIGURE 5.6 The rho of the European call option with respect to maturity date T and strike K
+    function = BSM_rho
+    greek = 'BSM_rho'
+    plot_greeks(function, greek)
+    
+    #FIGURE 5.7 The vega of the European call option with respect to maturity date T and strike K
+    function = BSM_vega
+    greek = 'BSM_vega'
+    plot_greeks(function, greek)
+    
     
