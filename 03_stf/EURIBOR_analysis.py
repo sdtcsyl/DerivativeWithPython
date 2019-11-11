@@ -40,4 +40,18 @@ def plot_term_structure(data):
 
 if __name__ == "__main__":
     data = read_euribor_data()
+        
+    # FIGURE 3.13 Histogram of daily log changes in 1 week Euribor in comparison to a normal
+    # distribution with same mean and standard deviation (line)
+    return_histogram(data)
+    
+    # FIGURE 3.14 Quantile-quantile plot of the daily log changes in the 1 week Euribor
+    return_qqplot(data)
+    
+    
+    rolling_statistics(data)
+    
+    
+    # FIGURE 3.15 Daily quotes of 1 week (dotted), 1 month (dot-dashed), 6 months (dashed) and 1 year
+    # Euribor (solid line) over the period from 01. January 1999 to 30. September 2014
     plot_term_structure(data)

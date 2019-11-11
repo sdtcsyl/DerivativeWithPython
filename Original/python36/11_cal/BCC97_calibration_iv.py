@@ -13,7 +13,7 @@ import numpy as np
 import matplotlib as mpl
 from scipy.optimize import fmin
 
-sys.path.append('09_gmm')
+sys.path.append('../09_gmm')
 from CIR_zcb_valuation import B
 from H93_calibration import options
 from BSM_imp_vol import call_option

@@ -190,3 +190,30 @@ def rolling_statistics(data):
     cx = plt.axis()
     plt.axis([vx[0], vx[1], cx[2], cx[3]])
     plt.axhline(co.mean(), color='r', ls='dashed', lw=1.5)
+    
+if __name__ == "__main__":
+    data = simulate_gbm()
+    
+    #the statistics
+    print_statistics(data)
+    
+    # FIGURE 3.1 A single simulated path for the geometric Brownian motion 
+    # over a 10-year period with daily log returns
+    quotes_returns(data)
+    
+    # FIGURE 3.2 Histogram of the daily log returns (bars) and for comparison the probability density 
+    # function of the normal distribution with the sample mean and volatility (line)
+    return_histogram(data)
+    
+    # FIGURE 3.3 Quantile-quantile plot of the daily log returns of the geometric
+    # Brownian motion
+    return_qqplot(data)
+    
+    #FIGURE 3.4 Realized volatility for the simulated path of the geometric Brownian motion
+    realized_volatility(data)
+    
+    #FIGURE 3.5 Rolling mean log return (252 days), rolling volatility (252 days) and rolling correlation
+    #between both (252 days) for geometric Brownian motion; dashed lines are averages over the whole
+    #period shown
+    rolling_statistics(data)
+    

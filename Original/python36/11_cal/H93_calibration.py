@@ -15,7 +15,7 @@ import pandas as pd
 import matplotlib as mpl
 from scipy.optimize import brute, fmin
 
-sys.path.append('09_gmm')
+sys.path.append(['../09_gmm','../08_m76/'])
 from BCC_option_valuation import H93_call_value
 from CIR_calibration import CIR_calibration, r_list
 from CIR_zcb_valuation import B
@@ -32,7 +32,7 @@ kappa_r, theta_r, sigma_r = CIR_calibration()
 # Market Data from www.eurexchange.com
 # as of 30. September 2014
 #
-h5 = pd.HDFStore('08_m76/option_data.h5', 'r')
+h5 = pd.HDFStore("../08_m76/option_data.h5", 'r') ## an error
 data = h5['data']  # European call & put option data (3 maturities)
 h5.close()
 S0 = 3225.93  # EURO STOXX 50 level 30.09.2014
@@ -138,3 +138,9 @@ def H93_calculate_model_values(p0):
                                      rho, v0)
         values.append(model_value)
     return np.array(values)
+
+if __name__ == "__main__":
+    H93_calibration_full()
+    
+    
+    

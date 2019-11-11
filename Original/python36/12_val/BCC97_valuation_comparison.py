@@ -9,7 +9,7 @@
 import sys
 import math
 
-sys.path.extend(['09_gmm', '10_mcs'])
+sys.path.extend([r'..\\09_gmm', r'..\\10_mcs'])
 from BCC_option_valuation import *
 from CIR_zcb_valuation_gen import B
 from BCC97_simulation import *

@@ -35,4 +35,29 @@ def count_jumps(data, value):
 
 if __name__ == "__main__":
     data = read_dax_data()
-    count_jumps(data, value)
+    
+    #the statistics
+    print_statistics(data)
+    
+    # FIGURE 3.6 DAX index level quotes and daily log returns over the period from 01. October 2004 to
+    # 30. September 2014
+    quotes_returns(data)
+    
+    # FIGURE 3.7 Histogram of the daily log returns of the DAX over the period from 01. October 2004 to
+    # 30. September 2014 (bars) and for comparison the probability density function of the normal
+    # distribution with the sample mean and volatility (line)
+    return_histogram(data)
+    
+    # FIGURE 3.8 Quantile-quantile plot of the daily log returns of the DAX over
+    # the period from 01. October 2004 to 30. September 2014
+    return_qqplot(data)
+    
+    # FIGURE 3.9 Realized volatility for the DAX over the period from 01. October 2004 to 30.
+    # September 2014
+    realized_volatility(data)
+    
+    # FIGURE 3.10 Rolling mean log return (252 days), rolling volatility (252 days) and rolling
+    # correlation between both (252 days); dashed lines are averages over the whole period shown
+    rolling_statistics(data)
+    
+    #count_jumps(data, value)

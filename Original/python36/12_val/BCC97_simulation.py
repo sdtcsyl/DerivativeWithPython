@@ -10,14 +10,14 @@ import math
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-sys.path.append('11_cal')
+sys.path.append(r'..\\11_cal')
 from H93_calibration import S0, kappa_r, theta_r, sigma_r, r0
 
 mpl.rcParams['font.family'] = 'serif'
 #
 # Model Parameters
 #
-opt = np.load('11_cal/opt_full.npy')
+opt = np.load('..\\11_cal\\opt_full.npy')
 kappa_v, theta_v, sigma_v, rho, v0, lamb, mu, delta = opt
 
 
