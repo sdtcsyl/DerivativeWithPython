@@ -91,6 +91,7 @@ def plot_imp_vols(data):
 
 if __name__ == "__main__":
     data = calculate_imp_vols(data)
+    
     # FIGURE 3.11 Implied volatilities from European call options on the EURO STOXX 50 on 30.
     # September 2014
     plot_imp_vols(data)
