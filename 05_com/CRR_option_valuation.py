@@ -97,4 +97,7 @@ if __name__ == "__main__":
     mmax = 500
     step_size = 2
     m = CRR_option_value(S0, K, T, r, sigma, otype, M=4)
+    
+    # FIGURE 5.8 European call option values from the CRR model for increasing number of time
+    # intervals M—step size of 20 intervals
     plot_convergence(mmin, mmax, step_size)
